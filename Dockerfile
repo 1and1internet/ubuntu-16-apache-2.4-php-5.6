@@ -10,15 +10,12 @@ RUN \
     sed -i -e 's/max_execution_time = 30/max_execution_time = 360/g' /etc/php/5.6/apache2/php.ini && \
     sed -i -e 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g' /etc/php/5.6/apache2/php.ini && \
     sed -i -e 's/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g' /etc/apache2/mods-available/dir.conf && \
-    sed -i -e '2 a\zend_extension=/usr/lib/php/20131226/ioncube_loader_lin_5.6.so' /etc/php/5.6/apache2/php.ini && \
-    sed -i -e '2 a\zend_extension=/usr/lib/php/20131226/ioncube_loader_lin_5.6.so' /etc/php/5.6/cli/php.ini && \
-    mkdir /usr/src/tmp && \
-    chmod -R 777 /usr/src/tmp && \
-    cd /usr/src/tmp/ && \
-    wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64_5.1.2.tar.gz && \
-    tar xfz ioncube_loaders_lin_x86-64_5.1.2.tar.gz && \
-    cp /usr/src/tmp/ioncube/ioncube_loader_lin_5.6.so /usr/lib/php/20131226/ && \
-    cd .. && \
+    touch /etc/php/5.6/apache2/conf.d/20-ioncube.ini && \
+    sed -i -e '2 a\zend_extension=/usr/lib/php/20131226/ioncube_loader_lin_5.6.so' /etc/php/5.6/apache2/conf.d/20-ioncube.ini && \
+    mkdir -p /usr/src/tmp/ioncube && \
+    curl -fSL "http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64_5.1.2.tar.gz" -o /usr/src/tmp/ioncube_loaders_lin_x86-64_5.1.2.tar.gz && \
+    tar xfz /usr/src/tmp/ioncube_loaders_lin_x86-64_5.1.2.tar.gz -C /usr/src/tmp/ioncube && \
+    cp /usr/src/tmp/ioncube/ioncube/ioncube_loader_lin_5.6.so /usr/lib/php/20131226/ && \
     rm -rf /usr/src/tmp/ioncube && \
     mkdir /tmp/composer/ && \
     cd /tmp/composer && \
