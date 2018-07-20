@@ -15,7 +15,7 @@ RUN \
     sed -i -e 's/post_max_size = 8M/post_max_size = 512M/g' /etc/php/5.6/apache2/php.ini && \
     sed -i -e 's/memory_limit = 128M/memory_limit = 512M/g' /etc/php/5.6/apache2/php.ini && \
     sed -i -e 's/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g' /etc/apache2/mods-available/dir.conf && \
-    sed -i 's/MaxConnectionsPerChild\s+0/MaxConnectionsPerChild   ${MAXCONNECTIONSPERCHILD}/' /etc/apache2/mods-available/* && \
+    sed -i -r 's/MaxConnectionsPerChild\s+0/MaxConnectionsPerChild   ${MAXCONNECTIONSPERCHILD}/' /etc/apache2/mods-available/* && \
     mkdir -p /usr/src/tmp/ioncube && \
     curl -fSL "http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64_5.1.2.tar.gz" -o /usr/src/tmp/ioncube_loaders_lin_x86-64_5.1.2.tar.gz && \
     tar xfz /usr/src/tmp/ioncube_loaders_lin_x86-64_5.1.2.tar.gz -C /usr/src/tmp/ioncube && \
