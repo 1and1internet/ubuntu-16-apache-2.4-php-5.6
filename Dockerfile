@@ -22,7 +22,7 @@ RUN \
     sed -i -e 's/memory_limit = 128M/memory_limit = 512M/g' /etc/php/${PHP_VERSION}/apache2/php.ini && \
     sed -i -e 's/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/g' /etc/apache2/mods-available/dir.conf && \
     sed -i -r 's/MaxConnectionsPerChild\s+0/MaxConnectionsPerChild   ${MAXCONNECTIONSPERCHILD}/' /etc/apache2/mods-available/* && \
-	sed -i -e 's/^session.gc_probability = 0/session.gc_probability = 100/' \
+	sed -i -e 's/^session.gc_probability = 0/session.gc_probability = 1/' \
 		   -e 's/session.gc_divisor = 1000/session.gc_divisor = 100/' /etc/php/${PHP_VERSION}/*/php.ini && \
     mkdir /tmp/composer/ && \
     cd /tmp/composer && \
